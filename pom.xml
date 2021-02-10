@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.seekyml</groupId>
-    <artifactId>smpcore</artifactId>
+    <artifactId>farming</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>SMPCore</name>
+    <name>AdvancedFarming</name>
 
-    <description>A must have for all SMP Servers! Tons of customizations, bugfixes and new mechanics.</description>
+    <description>Improves Minecraft's boring farming system by adding a variety of new Features!</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,6 +27,7 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <buildDirectory>D:\Server\plugins</buildDirectory>
                 </configuration>
             </plugin>
             <plugin>
@@ -41,6 +42,8 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <finalName>${project.artifactId}-${project.version}</finalName>
+                            <outputDirectory>D:\Server\plugins</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>

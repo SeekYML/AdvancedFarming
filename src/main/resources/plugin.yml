@@ -1,8 +1,17 @@
-name: SMPCore
-version: ${project.version}
-main: de.seekyml.smpcore.Main
+name: AdvancedFarming
+version: 1.0
+main: de.seekyml.farming.Main
 api-version: 1.16
-prefix: SMPCore
+prefix: ADVANCEDFARMING
 authors: [ SeekYML ]
-description: A must have for all SMP Servers! Tons of customizations, bugfixes and new mechanics.
+description: Improves Minecraft's boring farming system by adding a variety of new Features!
 website: https://www.seek.ml
+permissions:
+  af.admin:
+    default: op
+    description: Access to admin commands of AdvancedFarming.
+commands:
+  advancedfarming:
+    permission: af.admin
+    aliases: [af]
+    description: Check for updates and view available Commands.
