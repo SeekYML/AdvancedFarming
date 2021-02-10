@@ -1,0 +1,8 @@
+name: SMPCore
+version: ${project.version}
+main: de.seekyml.smpcore.Main
+api-version: 1.16
+prefix: SMPCore
+authors: [ SeekYML ]
+description: A must have for all SMP Servers! Tons of customizations, bugfixes and new mechanics.
+website: https://www.seek.ml
