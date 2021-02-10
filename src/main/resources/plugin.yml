@@ -1,6 +1,6 @@
 name: AdvancedFarming
 version: 1.0
-main: de.seekyml.farming.Main
+main: de.seekyml.farming.AdvancedFarming
 api-version: 1.16
 prefix: ADVANCEDFARMING
 authors: [ SeekYML ]

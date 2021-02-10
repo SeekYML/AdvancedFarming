@@ -1,7 +1,7 @@
 package de.seekyml.farming.commands;
 
-import de.seekyml.farming.Main;
-import org.bukkit.Bukkit;
+import de.seekyml.farming.AdvancedFarming;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,17 +16,17 @@ public class Reload implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length == 0) {
-            player.sendMessage(Main.getPlugin().getConfig().getString("general.prefix").replaceAll("&", "§") + " " + ChatColor.GRAY + "v1.0, developed by @seekyml\n"
-                    + "§7------------------------------.\n"
-                    + "§6/af reload §8- §7reload config");
+            player.sendMessage(AdvancedFarming.getPlugin().getConfig().getString("general.prefix").replaceAll("&", "§") + " " + ChatColor.GRAY + "v1.0, developed by @seekyml\n"
+                               + "§7------------------------------.\n"
+                               + "§6/af reload §8- §7reload config");
 
         }else {
             if (args[0].equalsIgnoreCase("reload")) {
                 if (player.hasPermission("af.admin") || player.isOp()) {
-                    Main.getPlugin().reloadConfig();
-                    player.sendMessage(Main.getPlugin().getConfig().getString("general.prefix").replaceAll("&", "§") + " " + ChatColor.GREEN + "Config reloaded.");
+                    AdvancedFarming.getPlugin().reloadConfig();
+                    player.sendMessage(AdvancedFarming.getPlugin().getConfig().getString("general.prefix").replaceAll("&", "§") + " " + ChatColor.GREEN + "Config reloaded.");
                 }else{
-                    player.sendMessage(Main.getPlugin().getConfig().getString("general.prefix").replaceAll("&", "§") + " " + Main.getPlugin().getConfig().getString("general.nopermissions").replaceAll("&", "§"));
+                    player.sendMessage(AdvancedFarming.getPlugin().getConfig().getString("general.prefix").replaceAll("&", "§") + " " + AdvancedFarming.getPlugin().getConfig().getString("general.nopermissions").replaceAll("&", "§"));
                 }
             }
         }

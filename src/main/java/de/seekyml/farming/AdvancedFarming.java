@@ -9,9 +9,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 
-public final class Main extends JavaPlugin {
+public final class AdvancedFarming extends JavaPlugin {
 
-    private static Main plugin;
+    private static AdvancedFarming plugin;
 
     public static Replenish replantEnch;
 
@@ -24,7 +24,7 @@ public final class Main extends JavaPlugin {
         registerCommands();
     }
 
-    public static Main getPlugin() {
+    public static AdvancedFarming getPlugin() {
         return plugin;
     }
 
