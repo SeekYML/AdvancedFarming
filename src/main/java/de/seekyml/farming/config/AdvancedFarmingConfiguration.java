@@ -14,7 +14,7 @@ import java.util.Optional;
 public final class AdvancedFarmingConfiguration extends SettingsManagerImpl {
 
     public AdvancedFarmingConfiguration(final Plugin plugin) {
-        super(new YamlFileResource(new File(plugin.getDataFolder(), "config.old").toPath()),
+        super(new YamlFileResource(new File(plugin.getDataFolder(), "config.yml").toPath()),
 
                 ConfigurationDataBuilder.createConfiguration(PluginSettings.class),
 
