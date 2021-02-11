@@ -3,9 +3,9 @@ version: 1.0
 main: de.seekyml.farming.AdvancedFarming
 api-version: 1.16
 prefix: ADVANCEDFARMING
-authors: [ SeekYML ]
+authors: [ Sxtanna, SeekYML ]
 description: Improves Minecraft's boring farming system by adding a variety of new Features!
-website: https://www.seek.ml
+website: https://github.com/SeekYML/AdvancedFarming
 permissions:
   af.admin:
     default: op

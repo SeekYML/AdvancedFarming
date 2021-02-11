@@ -27,7 +27,7 @@ import java.util.Random;
 
 public class Replenish extends Enchantment implements Listener {
 
-    AdvancedFarmingConfiguration settingsManager;
+    AdvancedFarmingConfiguration configuration;
 
     public Replenish(final AdvancedFarming plugin) {
         super(new NamespacedKey(plugin, "enchReplant"));
@@ -36,9 +36,9 @@ public class Replenish extends Enchantment implements Listener {
     @EventHandler
     public void onEnchantEvent(EnchantItemEvent e) {
         Random random = new Random();
-        int setChance = (100 - settingsManager.getProperty(ReplenishSettings.ENCHANT_CHANCE));
+        int setChance = (100 - configuration.getProperty(ReplenishSettings.ENCHANT_CHANCE));
         boolean chance = (random.nextInt(99) + 1 >= setChance);
-        if(settingsManager.getProperty(ReplenishSettings.ENABLED)){
+        if(configuration.getProperty(ReplenishSettings.ENABLED)){
             if (chance) {
                 int xpLevelCost;
                 // TODO: add this to config
@@ -50,12 +50,12 @@ public class Replenish extends Enchantment implements Listener {
                         || e.getItem().getType().equals(Material.NETHERITE_HOE));
                 boolean enchantedAlready = e.getItem().getItemMeta()
                         != null && e.getItem().getItemMeta().getLore()
-                        != null && e.getItem().getItemMeta().getLore().contains(settingsManager.getProperty(ReplenishSettings.ENCHANT_LORE_NAME));
+                        != null && e.getItem().getItemMeta().getLore().contains(configuration.getProperty(ReplenishSettings.ENCHANT_LORE_NAME));
                 xpLevelCost = 3;
                 if (isHoe && !enchantedAlready && e.whichButton() + 1 == xpLevelCost) {
                     e.getItem().addUnsafeEnchantment(Enchantment.getByKey(AdvancedFarming.replantEnch.getKey()), 1);
                     List<String> lore = (e.getItem().getItemMeta().getLore() == null) ? new ArrayList() : e.getItem().getItemMeta().getLore();
-                    lore.add(ChatColor.GRAY + settingsManager.getProperty(ReplenishSettings.ENCHANT_LORE_NAME).replaceAll("&", "§"));
+                    lore.add(ChatColor.GRAY + configuration.getProperty(ReplenishSettings.ENCHANT_LORE_NAME).replaceAll("&", "§"));
                     ItemMeta temp = e.getItem().getItemMeta();
                     temp.setLore(lore);
                     e.getItem().setItemMeta(temp);
@@ -68,13 +68,13 @@ public class Replenish extends Enchantment implements Listener {
     public void onCropBroken(BlockBreakEvent event) {
 
         boolean hasEnch = event.getPlayer().getInventory().getItemInMainHand().getEnchantments().containsKey(Enchantment.getByKey(AdvancedFarming.replantEnch.getKey()));
-        for (String enabled : settingsManager.getProperty(ReplenishSettings.ENCHANT_WHITELIST)) {
+        for (String enabled : configuration.getProperty(ReplenishSettings.ENCHANT_WHITELIST)) {
             if (event.getBlock().getType().equals(Material.SUGAR_CANE) && event.getBlock().getType() == Material.matchMaterial(enabled)) {
                 final Player player = event.getPlayer();
 
-                if (!event.getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.SUGAR_CANE) && hasEnch && settingsManager.getProperty(ReplenishSettings.ENABLED)) {
+                if (!event.getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.SUGAR_CANE) && hasEnch && configuration.getProperty(ReplenishSettings.ENABLED)) {
 
-                    if (settingsManager.getProperty(ReplenishSettings.UNBREAKABLE_HOE)) {
+                    if (configuration.getProperty(ReplenishSettings.UNBREAKABLE_HOE)) {
                         ItemStack item = player.getInventory().getItemInMainHand();
                         ItemMeta im = item.getItemMeta();
                         if (im instanceof Damageable) {
@@ -100,16 +100,16 @@ public class Replenish extends Enchantment implements Listener {
                 final Location location = block.getLocation();
                 final Player player = event.getPlayer();
                 final Ageable ageable = (Ageable) block.getBlockData();
-                if ((block.getBlockData() instanceof Ageable) && hasEnch && settingsManager.getProperty(ReplenishSettings.ENABLED)) {
+                if ((block.getBlockData() instanceof Ageable) && hasEnch && configuration.getProperty(ReplenishSettings.ENABLED)) {
                     if (ageable.getAge() == ageable.getMaximumAge()) {
 
-                        if (!settingsManager.getProperty(ReplenishSettings.BREAK_PARTIALLY_GROWN)) {
+                        if (!configuration.getProperty(ReplenishSettings.BREAK_PARTIALLY_GROWN)) {
                             event.setCancelled(true);
                         }
 
                         player.setExhaustion(player.getExhaustion() - 0.005F);
                         ageable.setAge(0);
-                        if (settingsManager.getProperty(ReplenishSettings.REQUIRE_RESOURCE)) {
+                        if (configuration.getProperty(ReplenishSettings.REQUIRE_RESOURCE)) {
                             ItemStack resource = null;
                             switch (event.getBlock().getType()) {
                                 case POTATOES:
@@ -132,7 +132,7 @@ public class Replenish extends Enchantment implements Listener {
                             for(ItemStack itemStack : player.getInventory().getContents()) {
                                 if(itemStack.equals(resource)) {
                                     if (resource.getAmount() > 1) {
-                                        resource.setAmount(resource.getAmount() - settingsManager.getProperty(ReplenishSettings.REQUIRE_RESOURCE_AMOUNT));
+                                        resource.setAmount(resource.getAmount() - configuration.getProperty(ReplenishSettings.REQUIRE_RESOURCE_AMOUNT));
                                         event.getPlayer().getInventory().removeItem(resource);
                                     } else {
                                         resource.setType(Material.AIR);
@@ -140,8 +140,8 @@ public class Replenish extends Enchantment implements Listener {
                                 }
                             }
                         }
-                        if (settingsManager.getProperty(ReplenishSettings.UNBREAKABLE_HOE)) {
-                            if (!settingsManager.getProperty(ReplenishSettings.DROPS_TO_INVENTORY)) {
+                        if (configuration.getProperty(ReplenishSettings.UNBREAKABLE_HOE)) {
+                            if (!configuration.getProperty(ReplenishSettings.DROPS_TO_INVENTORY)) {
                                 block.getDrops().forEach(drop -> player.getWorld().dropItemNaturally(location, drop));
                             } else {
                                 block.getDrops().forEach(drop -> player.getInventory().addItem(drop));
@@ -150,7 +150,7 @@ public class Replenish extends Enchantment implements Listener {
                         } else {
                             block.breakNaturally();
                         }
-                    } else if (!settingsManager.getProperty(ReplenishSettings.BREAK_PARTIALLY_GROWN)) {
+                    } else if (!configuration.getProperty(ReplenishSettings.BREAK_PARTIALLY_GROWN)) {
                         event.setCancelled(true);
                     }
                 }
@@ -159,7 +159,7 @@ public class Replenish extends Enchantment implements Listener {
     }
 
     public String getName() {
-        String lore = settingsManager.getProperty(ReplenishSettings.ENCHANT_LORE_NAME).replaceAll("&", "§");
+        String lore = configuration.getProperty(ReplenishSettings.ENCHANT_LORE_NAME).replaceAll("&", "§");
         return lore;
     }
 

@@ -12,29 +12,20 @@ import java.util.HashMap;
 
 public final class AdvancedFarming extends JavaPlugin {
 
-    private static AdvancedFarming plugin;
-
     public static Replenish replantEnch;
 
     {
         saveDefaultConfig(); // create empty config file
     }
 
-
     private final AdvancedFarmingConfiguration configuration = new AdvancedFarmingConfiguration(this);
-
 
     @Override
     public void onEnable() {
-        plugin = this;
         this.saveDefaultConfig();
         registerListeners();
         registerEnchants();
         registerCommands();
-    }
-
-    public static AdvancedFarming getPlugin() {
-        return plugin;
     }
 
     @Override

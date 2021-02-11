@@ -5,9 +5,7 @@ import ch.jalu.configme.SettingsHolder;
 
 import ch.jalu.configme.configurationdata.CommentsConfiguration;
 import ch.jalu.configme.properties.Property;
-import com.sun.org.apache.xerces.internal.xs.StringList;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static ch.jalu.configme.properties.PropertyInitializer.newProperty;
