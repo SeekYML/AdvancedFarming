@@ -2,7 +2,6 @@ package de.seekyml.farming;
 
 import co.aikar.commands.PaperCommandManager;
 import de.seekyml.farming.commands.AdvancedFarmingCommand;
-import de.seekyml.farming.commands.Reload;
 import de.seekyml.farming.enchantments.Replenish;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -23,7 +22,6 @@ public final class AdvancedFarming extends JavaPlugin {
         this.saveDefaultConfig();
         registerListeners();
         registerEnchants();
-        registerCommands();
 
         initializeCommandManager();
     }
@@ -81,9 +79,6 @@ public final class AdvancedFarming extends JavaPlugin {
     }
     public void registerListeners(){
         getServer().getPluginManager().registerEvents(new Replenish(),this);
-    }
-    public void registerCommands(){
-        getCommand("advancedfarming").setExecutor(new Reload());
     }
 
     public static void registerEnchantment(Enchantment enchantment) {
