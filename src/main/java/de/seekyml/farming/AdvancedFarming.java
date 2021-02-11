@@ -1,6 +1,7 @@
 package de.seekyml.farming;
 
 import de.seekyml.farming.commands.Reload;
+import de.seekyml.farming.config.AdvancedFarmingConfiguration;
 import de.seekyml.farming.enchantments.Replenish;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -14,6 +15,14 @@ public final class AdvancedFarming extends JavaPlugin {
     private static AdvancedFarming plugin;
 
     public static Replenish replantEnch;
+
+    {
+        saveDefaultConfig(); // create empty config file
+    }
+
+
+    private final AdvancedFarmingConfiguration configuration = new AdvancedFarmingConfiguration(this);
+
 
     @Override
     public void onEnable() {
@@ -53,12 +62,17 @@ public final class AdvancedFarming extends JavaPlugin {
         }
     }
 
+
+    public AdvancedFarmingConfiguration getConfiguration() {
+        return this.configuration;
+    }
+
     public void registerEnchants(){
-        replantEnch = new Replenish();
+        replantEnch = new Replenish(this);
         registerEnchantment(replantEnch);
     }
     public void registerListeners(){
-        getServer().getPluginManager().registerEvents(new Replenish(),this);
+        getServer().getPluginManager().registerEvents(new Replenish(this),this);
     }
     public void registerCommands(){
         getCommand("advancedfarming").setExecutor(new Reload());

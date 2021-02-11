@@ -1,0 +1,53 @@
+general:
+  ## Color codes: https://minecraft.gamepedia.com/Formatting_codes ##
+  prefix: "&8[&6&lADVANCEDFARMING&8]"
+  messages:
+    nopermissions: "&cYou don't have enough permissions to do that."
+
+########################################################################
+## ENCHANTMENTS ########################################################
+########################################################################
+enchantments:
+  ## REPLENISH: REPLANT CROPS UPON BREAKING ##
+  replenish:
+    ## Enable replenish enchantment? Default: true ##
+    enable: true
+    ## Which chance to get enchant? [ 1 to 99 ] Default: 20 ##
+    enchantmentchance: 20
+    ## Enchantmentname? Default: Replenish I ##
+    ## NOTE: IF YOU CHANGE THIS, EXISTING HOE'S WILL BE USELESS ##
+    lore: "Replenish I"
+    ## Break not finished crops? Default: false ##
+    breaknotfullygrown: false
+    ## Make Hoe unbreakable if enchantment equipped? Default: false ##
+    unbreakable: false
+    ## Drop items directly to inventory? Default: false ##
+    dropstoinventory: false
+
+    requireresource:
+      ## Should the "replant" process require the specific resource? Default: true ##
+      require: true
+      ## How much should the replant cost? Default: 1 ##
+      amount: 1
+      ## Should it only replant if resource is in Offhand? Default: false ##
+      inoffhand: false
+
+    ## Which blocks should be "replenishable"? ##
+    ## DEFAULT WHITELIST: ##
+    ## whitelist:
+    ##   - 'CARROTS'
+    ##   - 'POTATOES'
+    ##   - 'NETHER_WART'
+    ##   - 'BEETROOT_SEEDS'
+    ##   - 'WHEAT'
+    ##   - 'SUGAR_CANE'
+    ##   - 'COCOA'
+    ## DEFAULT WHITELIST: ##
+    whitelist:
+      - 'CARROTS'
+      - 'POTATOES'
+      - 'NETHER_WART'
+      - 'BEETROOT_SEEDS'
+      - 'WHEAT'
+      - 'SUGAR_CANE'
+      - 'COCOA'
