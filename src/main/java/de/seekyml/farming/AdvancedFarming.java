@@ -1,7 +1,8 @@
 package de.seekyml.farming;
 
-import de.seekyml.farming.commands.Reload;
-import de.seekyml.farming.config.AdvancedFarmingConfiguration;
+
+import co.aikar.commands.PaperCommandManager;
+import de.seekyml.farming.commands.AdvancedFarmingCommand;
 import de.seekyml.farming.enchantments.Replenish;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -16,21 +17,14 @@ public final class AdvancedFarming extends JavaPlugin {
 
     public static Replenish replantEnch;
 
-    {
-        saveDefaultConfig(); // create empty config file
-    }
-
-
-    private final AdvancedFarmingConfiguration configuration = new AdvancedFarmingConfiguration(this);
-
-
     @Override
     public void onEnable() {
         plugin = this;
         this.saveDefaultConfig();
         registerListeners();
         registerEnchants();
-        registerCommands();
+
+        initializeCommandManager();
     }
 
     public static AdvancedFarming getPlugin() {
@@ -63,8 +57,21 @@ public final class AdvancedFarming extends JavaPlugin {
     }
 
 
-    public AdvancedFarmingConfiguration getConfiguration() {
-        return this.configuration;
+    public void reload()
+    {
+        reloadConfig(); /* todo: replace with configuration.reload() */
+    }
+
+
+    private void initializeCommandManager()
+    {
+        final PaperCommandManager manager = new PaperCommandManager(this);
+        manager.enableUnstableAPI("help");
+        manager.enableUnstableAPI("brigadier");
+
+        /* todo: register contexts */
+
+        manager.registerCommand(new AdvancedFarmingCommand(this));
     }
 
     public void registerEnchants(){
@@ -73,9 +80,6 @@ public final class AdvancedFarming extends JavaPlugin {
     }
     public void registerListeners(){
         getServer().getPluginManager().registerEvents(new Replenish(),this);
-    }
-    public void registerCommands(){
-        getCommand("advancedfarming").setExecutor(new Reload());
     }
 
     public static void registerEnchantment(Enchantment enchantment) {
