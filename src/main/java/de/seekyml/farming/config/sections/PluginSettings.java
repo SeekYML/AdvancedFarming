@@ -8,7 +8,7 @@ import static ch.jalu.configme.properties.PropertyInitializer.newProperty;
 
 public final class PluginSettings implements SettingsHolder {
 
-    @Comment("# Color codes: https://minecraft.gamepedia.com/Formatting_codes ##")
+    @Comment("Color codes: https://minecraft.gamepedia.com/Formatting_codes")
     public static final Property<String> PREFIX = newProperty("general.prefix", "&8[&6&lADVANCEDFARMING&8]");
 
 
